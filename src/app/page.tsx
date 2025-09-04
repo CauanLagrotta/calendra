@@ -1,5 +1,11 @@
-import Image from "next/image";
+import LandingPage from "@/components/LandingPage";
+import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return <div></div>;
+export default async function HomePage() {
+  const user = await currentUser();
+
+  if (!user) return <LandingPage />;
+
+  return redirect("/events");
 }
