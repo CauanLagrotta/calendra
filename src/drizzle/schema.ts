@@ -11,7 +11,7 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 
-const createAt = timestamp("createdAt").notNull().defaultNow();
+const createdAt = timestamp("createdAt").notNull().defaultNow();
 const updatedAt = timestamp("updatedAt")
   .notNull()
   .defaultNow()
@@ -26,7 +26,7 @@ export const EventTable = pgTable(
     durationInMinutes: integer("durationInMinutes").notNull(),
     clerkUserId: text("clerkUserId").notNull(),
     isActive: boolean("isActive").notNull().default(true),
-    createAt,
+    createdAt,
     updatedAt,
   },
   (table) => [index("clerkUserIdIndex").on(table.clerkUserId)]
@@ -36,7 +36,7 @@ export const ScheduleTable = pgTable("schedules", {
   id: uuid("id").primaryKey().defaultRandom(),
   timezone: text("timezone").notNull(),
   clerkUserId: text("clerkUserId").notNull().unique(),
-  createAt,
+  createdAt,
   updatedAt,
 });
 
